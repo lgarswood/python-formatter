@@ -1,5 +1,5 @@
 from argparse import ArgumentParser
-from format_utils import split_lines
+import format_utils
 
 
 def run() -> None:
@@ -9,7 +9,12 @@ def run() -> None:
     parser.add_argument('--page-width', type=int, required=True,
         help='Number of characters per line')
     args = parser.parse_args()
-    print(split_lines(**args.__dict__))
+    try:
+        lines = format_utils.format_paragraph(args.paragraph, args.page_width)
+        for i, line in enumerate(lines):
+            print(f'Array [{i}] = "{line}"')
+    except format_utils.FormatException as e:
+        print(f'Error: {e.reason}')
 
 
 if __name__ == '__main__':
