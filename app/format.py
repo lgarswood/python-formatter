@@ -4,10 +4,12 @@ import format_utils
 
 def run() -> None:
     parser = ArgumentParser()
-    parser.add_argument('--paragraph', type=str, required=True,
-        help='The entire paragraph to parse')
-    parser.add_argument('--page-width', type=int, required=True,
-        help='Number of characters per line')
+    arg_list = [
+        ('paragraph', str, 'The entire paragraph to parse'),
+        ('page-width', int, 'Number of characters per line')
+    ]
+    for name, classe, desc in arg_list:
+        parser.add_argument(f'--{name}', type=classe, required=True, help=desc)
     args = parser.parse_args()
     try:
         lines = format_utils.split_lines(args.paragraph, args.page_width)

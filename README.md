@@ -1,6 +1,12 @@
 # python-formatter
 A formatter for paragraphs which stretches each line across the full page-width.
 
+## Requirements
+This project is compliant with Python3.6+. To install for mac using the **brew** manager, run:
+```bash
+brew install python3
+```
+
 ## Run as an application
 From the command-line, in the root project directory, run:
 ```bash
@@ -42,10 +48,9 @@ Parsing errors in the above example such as those encountered when running from 
 ## Running tests
 From the root directory, run:
 ```bash
-python3 -m unittest test.py
+python3 -m unittest tests/test*.py
 ```
 
 ## Notes
-* This project is compliant with Python3.6+
 * This does not use any external packages and thus you will find no requirements.txt file and nothing needs to be installed
 * It is best to use double-quotes instead of single-quotes from the command-line in case you use contractions in a paragraph
