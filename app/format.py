@@ -11,8 +11,8 @@ def run() -> None:
     args = parser.parse_args()
     try:
         lines = format_utils.split_lines(args.paragraph, args.page_width)
-        for i, line in enumerate(lines):
-            print(f'Array [{i}] = "{line}"')
+        for index, line in enumerate(lines):
+            print(f'Array [{index}] = "{line}"')
     except format_utils.FormatException as e:
         print(f'Error: {e.reason}')
 

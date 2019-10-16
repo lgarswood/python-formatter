@@ -17,7 +17,9 @@ def group_words_by_line(paragraph: str, page_width: int) -> List[List[str]]:
     lines: List[List[str]] = []
     current_words: List[str] = []
     for word in paragraph.split():
-        if line_length(current_words) + 1 + len(word) <= page_width:
+        if not current_words:
+            current_words.append(word)
+        elif line_length(current_words) + 1 + len(word) <= page_width:
             current_words.append(word)
         else:
             lines.append(current_words)
@@ -29,9 +31,9 @@ def group_words_by_line(paragraph: str, page_width: int) -> List[List[str]]:
 
 def shuffle_lines_to_fit(lines: List[List[str]], page_width: int) -> None:
     rev_lines: List[List[str]] = lines[::-1]
-    for i, current_words in enumerate(rev_lines[:-1]):
+    for index, current_words in enumerate(rev_lines[:-1]):
         if len(current_words) == 1 and len(current_words[0]) < page_width:
-            previous_words: List[str] = rev_lines[i + 1]
+            previous_words: List[str] = rev_lines[index + 1]
             if not previous_words:
                 continue
             if len(previous_words[-1]) + len(current_words[0]) < page_width:
@@ -42,7 +44,7 @@ def check_successfully_split(line: List[str], page_width: int) -> None:
     if len(line) == 1 and len(line[0]) != page_width:
         raise FormatException(f'"{line[0]}" cannot fit on a line alone.')
     if sum(len(w) for w in line) + len(line) - 1 > page_width:
-        raise FormatException(f'Line "{line}" cannot fit in width {page_width}.')
+        raise FormatException(f'"{line}" cannot fit in width {page_width}.')
 
 
 def split_lines(paragraph: str, page_width: int) -> List[str]:
@@ -63,7 +65,7 @@ def align_words(words: List[str], width: int) -> str:
     padding: int = (width - sum(len(w) for w in words)) // (len(words) - 1)
     # Some words require an extra space of padding. Add it to those words
     extra_padded: int = (width - sum(len(w) for w in words)) % (len(words) - 1)
-    for i in range(1, extra_padded + 1):
-        words[len(words) - i] = f' {words[len(words) - i]}'
+    for index in range(1, extra_padded + 1):
+        words[len(words) - index] = f' {words[len(words) - index]}'
 
     return (' ' * padding).join(words)
