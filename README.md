@@ -34,7 +34,7 @@ Ensure the root project directory is included in your **PYTHON_PATH** and use as
 from typing import List
 from app import format_utils
 
-formatted_lines: List[str] = format_utils.format_paragraph(paragraph, width)
+formatted_lines: List[str] = format_utils.split_lines(paragraph, width)
 ```
 
 Parsing errors in the above example such as those encountered when running from the command-line will raise a **format_utils.FormatException**.

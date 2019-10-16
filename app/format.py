@@ -10,7 +10,7 @@ def run() -> None:
         help='Number of characters per line')
     args = parser.parse_args()
     try:
-        lines = format_utils.format_paragraph(args.paragraph, args.page_width)
+        lines = format_utils.split_lines(args.paragraph, args.page_width)
         for i, line in enumerate(lines):
             print(f'Array [{i}] = "{line}"')
     except format_utils.FormatException as e:
